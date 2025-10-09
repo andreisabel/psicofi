@@ -1,0 +1,15 @@
+<nav>
+  <div class="nav nav-tabs container  flex-wrap" id="nav-tab" role="tablist">
+    <button class="nav-link active flex-fill" id="nav-gestion-tab" data-bs-toggle="tab" data-bs-target="#nav-gestion"
+      type="button" role="tab" aria-controls="nav-home" aria-selected="true" (click)="back()">ALUMNOS ATENDIDOS</button>
+  </div>
+</nav>
+
+
+<div class="tab-content container" id="nav-tabContent" style="height:50vh; overflow: auto;">
+  <div class="tab-pane fade show active" id="nav-gestion" role="tabpanel" aria-labelledby="nav-gestion-tab"
+    tabindex="0">
+  </div>
+  <app-tabla-alumnos *ngIf="historialVisible==1" [pacientes]="patients"></app-tabla-alumnos>
+  <app-alumno-atendido *ngIf="historialVisible==0"></app-alumno-atendido>
+</div>

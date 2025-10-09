@@ -1,0 +1,61 @@
+
+<h2 class="my-3">
+    HISTORIAL DE ALUMNO ATENDIDO
+</h2>
+<div class="container mt-2" style="min-height: 45vh;">
+    <div class="table-responsive ">
+        <table class="table table-striped" *ngIf="!isLoading">
+            <tbody>
+                <tr>
+                    <td class="text-end">Nombre: </td>
+                    <td>{{alumnoInfo.nombres + ' ' + alumnoInfo.apellidoPaterno + ' ' + alumnoInfo.apellidoMaterno}}</td>
+                    <td class="text-end">Condición académica: </td>
+                    <td>{{alumnoInfo.condicionAcademica}}</td>
+                </tr>
+                <tr>
+                    <td class="text-end">Clave única: </td>
+                    <td>{{alumnoInfo.claveUnica}}</td>
+                    <td class="text-end">Promedio: </td>
+                    <td>{{alumnoInfo.promedioGral}}</td>
+                </tr>
+                <tr>
+                    <td class="text-end">Área: </td>
+                    <td>{{alumnoInfo.area}}</td>
+                    <td class="text-end">Créditos aprobados: </td>
+                    <td>{{alumnoInfo.creditosAprobados}}</td>
+                </tr>
+                <tr>
+                    <td class="text-end">Carrera: </td>
+                    <td>{{alumnoInfo.carrera}}</td>
+                    <td class="text-end">Créditos inscritos: </td>
+                    <td>{{alumnoInfo.creditosInscritos}}</td>
+                </tr>
+                <tr>
+                    <td class="text-end">Semestre: </td>
+                    <td>{{alumnoInfo.semestre}}</td>
+                    <td class="text-end">Sexo: </td>
+                    <td>{{alumnoInfo.sexo}}</td>
+                </tr>
+                <tr>
+                    <td class="text-end">Asesor: </td>
+                    <td>{{alumnoInfo.asesor}}</td>
+                    <td class="text-end">Edad: </td>
+                    <td>{{alumnoInfo.edad}}</td>
+                </tr>
+                <tr>
+                    <td class="text-end">Foráneo: </td>
+                    <td colspan="3">--</td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<button class="btn btn-primary mb-2" (click)="back()">Regresar</button>
+
+<app-tabla-historial-citas *ngIf="!isLoading"></app-tabla-historial-citas>
+
+
+
+<app-loader *ngIf="isLoading"></app-loader>

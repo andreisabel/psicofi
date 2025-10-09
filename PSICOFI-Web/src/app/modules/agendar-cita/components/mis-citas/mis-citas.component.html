@@ -1,0 +1,108 @@
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6"> 
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th scope="row" class="text-left text-white">Clave única:</th>
+                        <td>{{ claveUnica }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-left text-white">Nombre:</th>
+                        <td>{{ nombre }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="tieneCita; else noCitaBlock" class="mt-5">
+        <p>En proceso:</p>
+        <div class="table-responsive" style="max-height: 460px;">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Psicólogo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cita of citasProceso">
+                        <td>{{ cita.fecha }}</td>
+                        <td>{{ cita.hora }}</td>
+                        <td>{{ cita.psicologo }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 d-flex justify-content-center">
+                <button *ngIf="!citaConfirmada" type="button" class="btn btn-danger mx-2" (click)="abrirModalCancelarCita()">Cancelar cita</button>
+                <button *ngIf="confirmarBtnCita && !citaConfirmada"  type="button" class="btn btn-primary mx-2" (click)="confirmarCita()" [disabled]="citaConfirmada">Confirmar asistencia</button>
+            </div>
+        </div>
+    </div>
+    <ng-template #noCitaBlock>
+        <div class="my-5">
+            <p>Usted no tiene cita agendada por el momento.</p>
+        </div>
+    </ng-template>
+    <p class="mt-5">Historial de citas:</p>
+    <div class="table-responsive" style="max-height: 460px;">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Psicólogo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cita of historialCitas">
+                    <td>{{ cita.fecha }}</td>
+                    <td>{{ cita.hora }}</td>
+                    <td class="col-auto">{{ cita['Nombres psicologo'] }} {{ cita['Apellido Pat psicologo'] }} {{ cita['Apellido Mat psicologo'] }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="alert alert-success fade-in d-flex align-items-center position-fixed top-50 start-50 translate-middle" role="alert" *ngIf="visible" style="z-index: 1000;">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+            <use xlink:href="#check-circle-fill"/>
+        </svg>
+        <div>
+            {{success_msg}}  
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Detalles de la Cita cancelada -->
+<div class="modal-backdrop" *ngIf="mostrarModalCancelarCita">
+    <div class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cancelacion de Cita</h5>
+                    <button type="button" class="close" aria-label="Cerrar" (click)="cerrarModalCancelarCita()">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        ¿Está seguro que desea cancelar la cita?
+                    </p>
+                    <br>
+                    <p>No podr&aacute;s agendar cita en los próximos 7 d&iacute;as</p>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button class="btn btn-secondary">Ver Datos del Alumno</button> -->
+                    <button class="btn btn-danger"  (click)="cancelarCita()">
+                        S&iacute; (Cancelar cita)</button>
+                    <button type="button" class="btn btn-secondary" (click)="cerrarModalCancelarCita()"> No (Regresar)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

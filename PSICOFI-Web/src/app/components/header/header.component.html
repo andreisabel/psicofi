@@ -1,0 +1,64 @@
+<div class="header container-fluid">
+    <div class="container">
+        <div class="row header">
+                <div class="col-12 col-md-auto d-flex justify-content-center justify-content-md-start align-items-center">
+                    <a href="https://www.uaslp.mx">
+                        <img src="assets/logo-uaslp.png" class="img-fluid logoUASLP" />
+                    </a>
+                    <p class="textoUASLP d-none"><a href="https://www.uaslp.mx">UASLP</a></p>
+    
+                    <div class="divisorUASLP-ENTIDAD me-2 ms-2"></div>
+                    <div class="divisorUASLP-ENTIDADScroll d-none me-2 ms-3"></div>
+    
+                    <a href="#" class="me-2">
+                        <p>DEPARTAMENTO DE ATENCI&Oacute;N <br>PSICOL&Oacute;GICA</p>
+                    </a>
+                    <p class="textoUASLP d-none me-2">DAP</p>
+                </div>
+                <div class="col d-flex justify-content-end align-items-end ms-auto">
+                    <p *ngIf="tipoUsuario" class="text-white bi">
+                        [{{tipoUsuario}} - {{clave}}]
+                    </p>
+                </div>
+            <div class="col-12 d-flex justify-content-end align-items-center py-2 d-md-none" *ngIf="tipoUsuario">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
+                    aria-controls="navbarMenu" [attr.aria-expanded]="menuAbierto ? 'true' : 'false'"
+                    aria-label="Toggle navigation" (click)="menuAbierto = !menuAbierto">
+                        <i class="text-white bi" [ngClass]="menuAbierto ? 'bi-chevron-up' : 'bi-list'" style="font-size:20px"></i>
+                </button>
+            </div>              
+
+            <div class="col-12 my-3 d-none d-md-block">
+                <div
+                    class="h-75 d-flex flex-column flex-sm-row bd-highlight justify-content-end align-items-sm-end pt-sm-0 py-5 my-0 align-items-center">
+                    <div *ngFor="let ruta of rutasFiltradas; let i = index" class="p-1 pe-0 bd-highlight">
+                        <a *ngIf="ruta.tipoUsuario.includes(tipoUsuario)" [routerLink]="ruta.path"
+                            (click)="navigate(ruta)">
+                            {{ ruta.title }}
+                        </a>
+                        <span *ngIf="i < rutasFiltradas.length - 1" class="text-white d-none d-md-inline"> | </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 d-md-none">
+                <div class="navbar-collapse" id="navbarMenu">
+                    <div
+                        class="h-75 d-flex flex-column flex-sm-row flex-lg-row bd-highlight justify-content-end align-items-sm-end pt-sm-0 py-2 pt-lg-0 align-items-lg-en align-items-center">
+                        
+                        <div *ngFor="let ruta of rutasFiltradas; let i = index" class="p-1 px-1 bd-highlight">
+                            <a *ngIf="ruta.tipoUsuario.includes(tipoUsuario)" [routerLink]="ruta.path"
+                                (click)="navigate(ruta)">
+                                {{ ruta.title }}
+                            </a>
+                            <span *ngIf="i < rutasFiltradas.length - 1"
+                                class="text-white d-none d-md-inline d-lg-inline"> | </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="fondoFooter" style="height:10px !important"></div>

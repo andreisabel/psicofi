@@ -1,0 +1,65 @@
+.input-td {
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    /* background-color: red; */
+    display: flex;
+    align-items:start;
+    justify-content:baseline;
+}
+
+.input-td input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    /* background-color: green; */
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+.bg-info
+{
+    background-color: #004A98 !important;
+    color: white;
+    font-weight: bold;
+    width: 35%;
+    text-align: end;
+    padding-top: 3px;
+    padding-bottom: 3px;;
+}
+
+.bg-info::after
+{
+    content: '\00a0';
+}
+
+table{
+    width: 100%;
+    border: 1px solid #0000003f;
+}
+
+table tr td::before
+{
+    content: '\00a0';
+}
+
+button
+{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+h2
+{
+    font-size: 12pt;
+    font-weight: bold;
+    color: #004A98;
+}
+
+#estatusPsicoInfo i{
+    font-size: 15px;
+}

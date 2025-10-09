@@ -1,0 +1,102 @@
+<div class="container my-5" style="margin-bottom: 100px!important;">
+  <form #form="ngForm" (ngSubmit)="agregarPsicologo(form)">
+    <div class="row">
+      <div class="col">
+        <label for="clave" class="oblig">Clave &uacute;nica/CURP:</label>
+        <input type="text" class="form-control" id="clave" name="clave" placeholder="Clave &uacute;nica/CURP"
+          [(ngModel)]="claveNuevo" #clave="ngModel" required>
+        <div *ngIf="clave.invalid && clave.touched" class="text-danger">
+          La clave única o CURP es obligatoria.
+        </div>
+        <div *ngIf="claveError" class="text-danger">
+          {{ claveError }}
+        </div>
+      </div>
+      <div class="col">
+        <label for="nombres" class="oblig">Nombre (s):</label>
+        <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres"
+          [(ngModel)]="nuevoPsicologo.nombres" #nombres="ngModel" required>
+        <div *ngIf="nombres.invalid && nombres.touched" class="text-danger">
+          El nombre es obligatorio.
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="apellidoPat" class="oblig">Apellido Paterno:</label>
+        <input type="text" class="form-control" id="apellidoPat" name="apePat" placeholder="Apellido Paterno"
+          [(ngModel)]="nuevoPsicologo.apellidoPaterno" #apellidoPaterno="ngModel" required>
+        <div *ngIf="apellidoPaterno.invalid && apellidoPaterno.touched" class="text-danger">
+          El apellido paterno es obligatorio.
+        </div>
+      </div>
+      <div class="col">
+        <label for="apellidoMat">Apellido Materno:</label>
+        <input type="text" class="form-control" id="apellidoMat" name="apeMat" placeholder="Apellido Materno"
+          [(ngModel)]="nuevoPsicologo.apellidoMaterno">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="semestre" class="oblig">Semestre:</label>
+        <input type="number" class="form-control" id="semestre" name="semestre" placeholder="Semestre"
+          [(ngModel)]="nuevoPsicologo.semestre" #semestre="ngModel" required min="1" max="12">
+        <div *ngIf="semestre.invalid && semestre.touched" class="text-danger">
+          El semestre debe estar entre 1 y 12.
+        </div>
+      </div>
+      <div class="col">
+        <label for="carrera" class="oblig">Carrera:</label>
+        <select id="carrera" class="form-select" name="carrera" [(ngModel)]="nuevoPsicologo.idCarrera"
+          #carrera="ngModel" required>
+          <option value="1">Licenciatura en Psicolog&iacute;a</option>
+          <option value="2">Licenciatura en Psicopedagog&iacute;a</option>
+        </select>
+        <div *ngIf="carrera.invalid && carrera.touched" class="text-danger">
+          Selecciona una carrera.
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <label for="correo" class="oblig">Correo electr&oacute;nico:</label>
+        <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo electr&oacute;nico"
+          [(ngModel)]="nuevoPsicologo.correo" #correo="ngModel" required email>
+        <div *ngIf="correo.invalid && correo.touched" class="text-danger">
+          Proporciona un correo electrónico válido.
+        </div>
+      </div>
+    </div>
+    <div class="container text-center my-5">
+      <button type="submit" class="btn btn-primary" style="width: 50%;" [disabled]="form.invalid">Guardar</button>
+    </div>
+  </form>
+
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+      <path
+        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+    </symbol>
+    <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+      <path
+        d="M7.938 2.016a.13.13 0 0 1 .125 0l6.857 11.856c.06.103.062.23.004.335a.25.25 0 0 1-.221.127H1.297a.25.25 0 0 1-.221-.127.267.267 0 0 1 .004-.335l6.857-11.856zM8 5.5c-.535 0-.954.462-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 5.5zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+    </symbol>
+  </svg>
+
+  <div *ngIf="visible" class="alert fade-in d-flex align-items-center position-fixed top-50 start-50 translate-middle"
+    [ngClass]="{'alert-success': mensajeTipo === 'success', 'alert-danger': mensajeTipo === 'error'}" role="alert"
+    style="z-index: 1000;">
+
+    <svg *ngIf="mensajeTipo === 'success'" class="bi flex-shrink-0 me-2" width="24" height="24" role="img"
+      aria-label="Success:">
+      <use xlink:href="#check-circle-fill" />
+    </svg>
+
+    <svg *ngIf="mensajeTipo === 'error'" class="bi flex-shrink-0 me-2" width="24" height="24" role="img"
+      aria-label="Error:">
+      <use xlink:href="#exclamation-triangle-fill" />
+    </svg>
+
+    <div>{{ mensaje }}</div>
+  </div>
+</div>

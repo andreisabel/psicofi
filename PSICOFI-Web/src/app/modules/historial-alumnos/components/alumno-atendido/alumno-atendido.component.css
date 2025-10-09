@@ -1,0 +1,23 @@
+thead tr th.blue
+{
+    background-color: #004A98;
+    color: white;
+}
+
+thead tr th.gray
+{
+    background-color: #dbdfe4;
+    color: black;
+}
+
+tbody tr td:nth-child(odd)
+{
+    background-color: #004A98;
+    color: white;
+}
+
+h2{
+    color: #004A98;
+    font-size: 15pt;
+    font-weight: bold;
+}

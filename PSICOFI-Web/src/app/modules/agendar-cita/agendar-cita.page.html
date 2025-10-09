@@ -1,0 +1,18 @@
+<nav>
+  <div class="nav nav-tabs container  flex-wrap" id="nav-tab" role="tablist">
+    <button class="nav-link active flex-fill" id="nav-gestion-tab" data-bs-toggle="tab" data-bs-target="#nav-gestion" type="button"
+      role="tab" aria-controls="nav-home" aria-selected="true">AGENDAR CITA</button>
+    <button class="nav-link inactive flex-fill" id="nav-anadir-tab" data-bs-toggle="tab" data-bs-target="#nav-anadir" type="button"
+      role="tab" aria-controls="nav-profile" aria-selected="false">MIS CITAS</button>
+  </div>
+</nav>
+
+
+<div class="tab-content container" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-gestion" role="tabpanel" aria-labelledby="nav-gestion-tab" tabindex="0">
+    <app-agenda-cita></app-agenda-cita>
+  </div>
+  <div class="tab-pane fade" id="nav-anadir" role="tabpanel" aria-labelledby="nav-anadir-tab" tabindex="0">
+    <app-mis-citas></app-mis-citas>
+  </div>
+</div>

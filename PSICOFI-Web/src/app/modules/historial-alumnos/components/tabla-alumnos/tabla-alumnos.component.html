@@ -1,0 +1,37 @@
+<div class="container my-5" style="max-height: 45vh;">
+
+  <div class="container fade-in">
+    <div class="row my-4">
+      <div class="col-10">
+        <input type="text" class="form-control" placeholder="Buscar paciente" name="buscarInput"
+          [(ngModel)]="inputBuscar" (ngModelChange)="buscarChange()" />
+      </div>
+      <div class="col-1">
+        <button type="button" class="btn btn-primary"><i class="bi bi-search"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col" class="ps-3 sticky-header">Clave única</th>
+        <th scope="col" class="text-center sticky-header">Ver historial</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let paciente of filteredPacientes">
+        <td class="ps-3">{{ paciente }}</td>
+        <td class="text-center clickable">
+          <button type="button" class="btn btn-secondary" (click)="verAlumnoAtendido(paciente)">
+            <i class="bi bi-eye"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!isLoading && filteredPacientes.length === 0" class="alert alert-info" role="alert">
+    No se encontraron resultados
+  </div>
+</div>

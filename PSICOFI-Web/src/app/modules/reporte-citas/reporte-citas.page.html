@@ -1,0 +1,7 @@
+<div class="container" *ngIf="notaCita">
+    <app-datos-reporte-cita></app-datos-reporte-cita>
+    <app-formulario-reporte-cita></app-formulario-reporte-cita>
+</div>
+<div *ngIf="!notaCita" style="height: 53vh;">
+    <app-loader></app-loader>
+</div>

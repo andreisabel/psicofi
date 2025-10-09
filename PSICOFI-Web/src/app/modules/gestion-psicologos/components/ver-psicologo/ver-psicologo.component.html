@@ -1,0 +1,49 @@
+<div class="container fade-in">
+    <div class="container">
+        <table class="my-4">
+            <tr>
+                <td class="bg-info">Clave &uacute;nica / CURP:&nbsp;</td>
+                <td *ngIf="!psicologoViendo.curp" id="clavePsicoInfo">{{ psicologoViendo.claveUnica }}</td>
+                <td *ngIf="psicologoViendo.curp" id="curpPsicoInfo">{{ psicologoViendo.curp }}</td>
+            </tr>
+            
+            <tr>
+                <td class="bg-info">Nombre:&nbsp;</td>
+                <td id="nombrePsicoInfo">{{psicologoViendo.nombres}}</td>
+            </tr>
+            <tr>
+                <td class="bg-info">Semestre &nbsp;</td>
+                <td id="semestrePsicoInfo">{{psicologoViendo.semestre}}</td>
+            </tr>
+            <tr>
+                <td class="bg-info">Carrera: &nbsp;</td>
+                <td id="carreraPsicoInfo">{{psicologoViendo.carrera}}</td>
+            </tr>
+            <tr>
+                <td class="bg-info">Estatus: &nbsp;</td>
+                <td id="estatusPsicoInfo">
+                    <i class="bi bi-circle-fill text-success" *ngIf="psicologoViendo.activo == 1"> Activo</i>
+                    <i class="bi bi-circle text-muted" *ngIf="psicologoViendo.activo == 0"> Inactivo</i>
+                </td>            
+            </tr>
+            <tr>
+                <td class="bg-info">Correo: &nbsp;</td>
+                <td id="correoPsicoInfo">{{psicologoViendo.correo}}</td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="container my-2">
+        <div class="row justify-content-around">
+            <div class="col-3">
+                <button class="btn btn-primary" (click)="ocultarVer()">Volver</button>
+            </div>
+            <div class="col-3 ms-start">
+                <button class="btn btn-primary float-end" style="display: none;">Editar</button>
+            </div>
+        </div>
+    </div>
+    <h2 class="text-center my-3">ALUMNOS ATENDIDOS POR {{psicologoViendo.claveUnica}} {{psicologoViendo.nombres}}</h2>
+    <app-tabla-alumnos-atendidos></app-tabla-alumnos-atendidos>
+</div>
+

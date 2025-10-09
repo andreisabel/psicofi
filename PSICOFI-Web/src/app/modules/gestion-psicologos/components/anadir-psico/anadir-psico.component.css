@@ -1,0 +1,17 @@
+*
+{
+    font-size: large;
+}
+
+.row
+{
+    margin-top: 20px;
+}
+
+label.oblig::after {
+    content: "*";
+    color: red;
+    margin-left: 4px; /* Ajusta el margen según sea necesario */
+    font-size: small;
+}
+
