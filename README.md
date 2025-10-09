@@ -1,6 +1,6 @@
-# 🏥 PSICOFI - Sistema de Gestión de Pacientes
+# 🏥 PSICOFI - Plataforma Psicológica de la Facultad de Ingeniería
 
-**Proyecto Integrador - Facultad de Ingeniería, Universidad Autónoma de San Luis Potosí (UASLP)**
+**Proyecto Integrador - Facultad de Ingeniería, Universidad Autónoma de San Luis Potosí (UASLP) Semestres 2023/II-2024/II**
 
 ---
 
