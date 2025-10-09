@@ -1,0 +1,38 @@
+nav div button
+{
+    border-radius: 10px 10px 0 0;
+    padding: 10px 15px 10px 15px;
+    margin-top: 5px;
+    color: #004A98!important;
+    font-weight: bolder;
+    font-size: 1.2em;
+    margin-right: 10px;
+    background-color: #f4f4f4;
+}
+
+nav
+{
+    background-color: #D9D9D9;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: white !important; /* Color para el botón activo */
+  }
+  
+
+#imageContainer
+{
+    border-radius: 100%;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+}
+
+#imageContainer img
+{
+    object-fit: cover;
+}
+
+input{
+    margin-bottom:15px;
+}

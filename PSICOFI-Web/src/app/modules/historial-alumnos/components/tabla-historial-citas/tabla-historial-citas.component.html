@@ -1,0 +1,26 @@
+<div class="container" >
+    <h6 class="my-2">Historial de citas</h6>
+
+    <table class="table table-striped">
+        <thead>
+            <tr> 
+                <th scope="col" class="text-center" style="cursor: pointer;"  (click)="toggleOrden()">Fecha <i style="font-size: 20px;" class="mx-2 bi text-white " [ngClass]="ordenAscendente ? 'bi-sort-numeric-down' : 'bi-sort-numeric-up'"></i></th>
+                <th scope="col" class="text-center">Hora</th>
+                <th scope="col">Psicólogo</th>
+                <th scope="col" class="text-center">Reporte de cita</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let record of records">
+                <td class="text-center">{{record.fecha}}</td>
+                <td class="text-center">{{record.hora}}</td>
+                <td>{{ record['Nombres psicologo'] + ' ' + record['Apellido Pat psicologo'] + ' ' + record['Apellido Mat psicologo'] }}</td>
+                <td class="text-center"><button type="button" class="btn btn-secondary" (click)="redirectToReporteCitas(record.idCita)"><i
+                    class="bi bi-eye"></i></button></td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-loader *ngIf="isLoading"></app-loader>

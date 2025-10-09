@@ -1,0 +1,28 @@
+<div class="container my-5">
+  <form id="fechas">
+    <div class="row my-5">
+      <div class="col-6">
+        <label for="selectArea" class="form-label mb-3">Carrera:</label>
+        <select class="form-select form-select-lg" name="area" id="selectArea" [(ngModel)]="selectedCarrera">
+          <option *ngFor="let carrera of carreras" [value]="carrera">{{ carrera }}</option>
+        </select>        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <label for="desde">Desde:</label>
+        <input class="form-control" type="date" name="desde" id="desde-input" [(ngModel)]="fechaInicial">
+      </div>
+      <div class="col-6">
+        <label for="hasta">Hasta:</label>
+        <input class="form-control" type="date" name="hasta" id="hasta-input" [(ngModel)]="fechaFinal">
+      </div>
+    </div>
+  </form>
+  <app-graficas 
+    [tipo]="'carrera'" 
+    [nombre]="selectedCarrera" 
+    [fechaInicial]="fechaInicial" 
+    [fechaFinal]="fechaFinal">
+  </app-graficas>
+</div>

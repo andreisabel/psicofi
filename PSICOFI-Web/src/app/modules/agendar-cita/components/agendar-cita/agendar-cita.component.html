@@ -1,0 +1,37 @@
+<div class="container my-5" style="margin-bottom: 100px!important;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="text-left text-white">Clave única:</th>
+                            <td>{{claveUnica}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-left text-white">Nombre:</th>
+                            <td>{{nombre}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-left text-white">Psicólogo:</th>
+                            <td>
+                                <!-- Desplegable -->
+                                <select class="form-control" (change)="seleccionarPsicologo($event)">
+                                    <option *ngFor="let psicologo of psicologos" [value]="psicologo.id">{{psicologo.nombre}}</option>
+                                </select>                                                                                   
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul class="my-4">
+                    <li>Haz clic en una fecha para ver el horario disponible en el que tu psicólogo te puede atender.</li>
+                    <li>Haz clic en la hora que deseas agendar cita.</li>
+                    <li>Podrás cancelar tu cita agendada con 24 hrs. de anticipación.</li>
+                    <li>No podrás agendar otra cita con tu psicólogo hasta concluir la cita agendada.</li>
+                    <li>Si tu psicólogo cancela tu cita, el sistema te notificará.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <app-calendario *ngIf="psicologoCargado && psicologoSeleccionadoId" [psicologoId]="psicologoSeleccionadoId"></app-calendario>
+</div>

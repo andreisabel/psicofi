@@ -1,0 +1,19 @@
+<nav>
+  <div class="nav nav-tabs container  flex-wrap" id="nav-tab" role="tablist">
+      <button class="nav-link active flex-fill" id="nav-gestion-tab" data-bs-toggle="tab" data-bs-target="#nav-gestion" type="button"
+        role="tab" aria-controls="nav-home" aria-selected="true" (click)="reloadPsicologos()">GESTI&Oacute;N DE PSIC&Oacute;LOGOS</button>
+    <button class="nav-link inactive flex-fill" id="nav-anadir-tab" data-bs-toggle="tab" data-bs-target="#nav-anadir" type="button"
+      role="tab" aria-controls="nav-profile" aria-selected="false">A&Ntilde;ADIR PSIC&Oacute;LOGO</button>
+  </div>
+</nav>
+
+
+<div class="tab-content container mb-3" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-gestion" role="tabpanel" aria-labelledby="nav-gestion-tab" tabindex="0">
+    <app-gestion-psico *ngIf="!verPsicoVisible"></app-gestion-psico>
+    <app-ver-psicologo *ngIf="verPsicoVisible"></app-ver-psicologo>
+  </div>
+  <div class="tab-pane fade" id="nav-anadir" role="tabpanel" aria-labelledby="nav-anadir-tab" tabindex="0">
+    <app-anadir-psico></app-anadir-psico>
+  </div>
+</div>

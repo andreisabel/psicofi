@@ -1,0 +1,20 @@
+*
+{
+    font-size: large;
+}
+
+.row
+{
+    margin-top: 20px;
+}
+
+label.oblig::after {
+    content: "*";
+    color: red;
+    margin-left: 4px; 
+    font-size: small;
+}
+
+th {
+    background-color: #004A98; 
+}

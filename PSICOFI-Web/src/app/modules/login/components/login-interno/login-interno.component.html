@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row">
+    <div class="col-5">
+      <img src="assets/logo-uaslp_blue.png" alt="logo-UASLP" />
+    </div>
+    <div class="col-1">
+      <hr class="vr mx-3" style="height: 50px; color: #23488C">
+    </div>
+    <div class="col-5">
+      <img src="assets/logo-fi_blue.png" alt="logo-FI" />
+    </div>
+  </div>
+  <h2 class="text-center mt-4">Departamento de Atenci&oacute;n Psicol&oacute;gica</h2>
+  <hr style="color:#23488C;">
+  <div class="container">
+    <form (ngSubmit)="onSubmit()" #loginFormulario="ngForm" novalidate>
+      <div class="mb-3">
+        <label for="cvunica" class="form-label">Clave</label>
+        <input type="text" class="form-control" name="cvunica" id="cvunica" placeholder="Clave"  
+        [(ngModel)]="cvunica" maxlength="18" />
+      </div>
+
+      <div class="mb-3">
+        <label for="" class="form-label">Contrase&ntilde;a</label>
+        <input type="password" class="form-control" name="contrasena" id="contrasena" placeholder="Contrase&ntilde;a"
+          [(ngModel)]="contrasena" required />
+      </div>
+      <div class="form-group">
+        <div class="form-check ps-0">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck" [(ngModel)]="checkboxAceptado"
+              name="terminos" required />
+            <label class="form-check-label" for="gridCheck">
+              Acepto el
+              <a data-bs-toggle="modal" data-bs-target="#modalId" class="text-primary linkPrivacidad">
+                aviso de privacidad
+              </a>
+              <span class="text-danger">*</span>
+            </label>
+          </div>
+        </div>
+      </div>
+        <button type="submit" class="btn btn-primary my-3 w-100" [disabled]="!checkboxAceptado">
+          Iniciar Sesi&oacute;n
+        </button>
+    </form>
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+    <p>¿Eres administrador? <span class="text-info" id="switchLogin" (click)="switchLogin()"><b>Inicia
+      sesi&oacute;n aqu&iacute;</b></span></p>
+  </div>
+</div>
+
+
+
+<app-loader *ngIf="isLoading"></app-loader>

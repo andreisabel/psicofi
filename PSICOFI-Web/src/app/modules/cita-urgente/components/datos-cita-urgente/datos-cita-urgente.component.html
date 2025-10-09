@@ -1,0 +1,39 @@
+<div class="container fade-in">
+    <div class="container">
+        <div class="mb-3">
+            <table class="my-4">
+                <tr>
+                    <td class="bg-info">Clave &uacute;nica:</td>
+                    <td class="input-td">
+                        <input type="number" placeholder="Introduce una clave única válida" class="form-control" id="claveUnica" [(ngModel)]="claveUnica"
+                        [(ngModel)]="cita.claveUnica" (change)="actualizarCita()" (keyup.enter)="buscarAlumno()" (blur)="buscarAlumno()" autofocus>
+                    </td>
+                </tr>
+                <tr *ngIf="alumno">
+                    <td class="bg-info">Nombre:</td>
+                    <td *ngIf="encontrado==true">{{alumno.nombres}} {{alumno.apellidoPaterno}} {{alumno.apellidoMaterno}}</td>
+                    <td *ngIf="encontrado==false"></td>
+                </tr>
+                <tr *ngIf="alumno">
+                    <td class="bg-info">Fecha:</td>
+                    <input type="date" [(ngModel)]="cita.fecha" placeholder="Introduce la fecha de la cita" (change)="actualizarCita()">
+                    <select [(ngModel)]="cita.hora" placeholder="Selecciona la hora" (change)="actualizarCita()">
+                        <option value="09:00">9:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="13:00">1:00 PM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                        <option value="17:00">5:00 PM</option>
+                        <option value="18:00">6:00 PM</option>
+                    </select>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<app-loader *ngIf="isLoading"></app-loader>

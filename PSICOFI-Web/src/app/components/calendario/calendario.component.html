@@ -1,0 +1,253 @@
+<div class="container my-5" style="margin-bottom: 100px!important;">
+  <div class="row justify-content-center">
+    <!-- Simbología -->
+    <div class="col-md-2">
+      <div class="simbologia">
+        <ul class="list-unstyled">
+          <li class="mb-2"><span class="color-box color-box-blue"></span> Día seleccionado</li>
+          <li class="mb-2"><span class="color-box color-box-green"></span> Alta disponibilidad</li>
+          <li class="mb-2"><span class="color-box color-box-yellow"></span> Baja disponibilidad</li>
+          <li class="mb-2"><span class="color-box color-box-red"></span> Muy baja disponibilidad</li>
+        </ul>
+      </div>
+    </div>
+    <!-- Calendario -->
+    <div class="col-md-6 mb-sm-4">
+      <div class="calendario">
+        <div class="mes">
+          <a href="#" class="nav" [class.disabled]="esMesActual()" (click)="mesAnterior(); $event.preventDefault()">
+            <i class="bi bi-chevron-left"></i>
+          </a>
+          <div>{{ meses[fechaActual.getMonth()] }} <span class="year">{{ fechaActual.getFullYear() }}</span></div>
+          <a href="#" class="nav" (click)="mesSiguiente(); $event.preventDefault()">
+            <i class="bi bi-chevron-right"></i>
+          </a>
+        </div>
+        <div class="dias">
+          <span *ngFor="let dia of diasDeLaSemana">{{ dia }}</span>
+        </div>
+        <div class="cita">
+          <button *ngFor="let dia of diasDelMes; let i = index" (click)="seleccionarDia(dia, $event)"
+            [class.otro-mes]="dia.getMonth() !== fechaActual.getMonth()"
+            [class.today]="dia.toDateString() === hoy.toDateString()"
+            [class.dia-seleccionado]="diaSeleccionado && dia.toDateString() === diaSeleccionado.toDateString()"
+            [ngClass]="getDisponibilidadClase(dia)">
+            <time>{{ dia.getDate() }}</time>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mt-sm-2 p-3" *ngIf="diaSeleccionado">
+      <div *ngIf="diaSeleccionado">
+        <h2>{{ diaSeleccionado | date: 'EEEE, d MMMM y' }}</h2>
+
+        <!-- Esta parte permanece visible solo para alumnos -->
+        <div *ngIf="tipoUsuario === 'Alumno'">
+          <div *ngIf="citaAgendada">
+            <h4>Ya tienes una cita agendada, verifícala en "Mis citas". Es necesario que confirmes la asistencia en
+              dicha sección con un máximo de 48 horas antes de la cita.</h4>
+          </div>
+          <div *ngIf="horariosDelDiaSeleccionado.length > 0 && !citaAgendada">
+            <h4>Horas disponibles</h4>
+            <div class="horas-contenedor">
+              <button class="btn btn-outline-primary hora-btn" *ngFor="let hora of horariosDelDiaSeleccionado"
+                (click)="horaSeleccionada = hora; abrirModalConfirmacion()">
+                {{ hora | slice:0:5 }}
+              </button>
+            </div>
+          </div>
+          <div *ngIf="horariosDelDiaSeleccionado.length == 0 && !citaAgendada">
+            <h4>No hay citas disponibles para este día</h4>
+          </div>
+        </div>
+        <!-- Secciones específicas para psicólogos -->
+        <div *ngIf="tipoUsuario === 'Psicologo' || tipoUsuario ==='Psicologo externo'">
+          <!-- Horarios sin cita agendada (Disponibles para cancelar) -->
+          <div>
+            <h4>Horarios sin cita agendada</h4>
+            <div *ngIf="citasDisponibles.length > 0; else noDisponibles">
+              <div class="horas-contenedor">
+                <button class="btn btn-outline-danger hora-btn" *ngFor="let cita of citasDisponibles"
+                  (click)="abrirModalCancelacion(cita)">
+                  {{ cita.hora | slice:0:5 }}
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+            <ng-template #noDisponibles>
+              <p>Por el momento no hay horarios habilitados.</p>
+            </ng-template>
+          </div>
+
+          <!-- Horarios con citas ya agendadas -->
+          <div>
+            <h4>Horarios con cita agendada</h4>
+            <div *ngIf="citasAgendadas.length > 0; else noAgendadas">
+              <div class="horas-contenedor">
+                <ng-container *ngFor="let cita of citasAgendadas; let i = index">
+                  <button class="btn btn-outline-info hora-btn" (click)="abrirModalDetalles(cita)">
+                    {{ cita.hora | slice:0:5 }}
+                  </button>
+                </ng-container>
+              </div>
+            </div>
+            <ng-template #noAgendadas>
+              <p>Por el momento no hay citas agendadas.</p>
+            </ng-template>
+          </div>
+
+          <!-- Agregar nueva hora disponible -->
+          <div>
+            <h4>Agregar hora disponible</h4>
+            <button class="btn btn-outline-secondary btn-block" (click)="abrirModalAgregarHora()">Agregar hora</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal para Confirmar Cita -->
+<div class="modal-backdrop" *ngIf="mostrarModalConfirmacion">
+  <div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmar Cita</h5>
+          <button type="button" class="close" aria-label="Cerrar" (click)="cerrarModalConfirmacion()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ¿Quieres agendar una cita el día: {{ diaSeleccionado | date:'dd-MM-yyyy' }} a las: {{ horaSeleccionada |
+          slice:0:5 }}?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="cerrarModalConfirmacion()">Cerrar</button>
+          <button type="button" class="btn btn-primary" (click)="confirmarCita()">Confirmar Cita</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal de Confirmación de Cancelación -->
+<div class="modal-backdrop" *ngIf="mostrarModalCancelacion">
+  <div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmar Cancelación</h5>
+          <button type="button" class="close" aria-label="Close" (click)="cerrarModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ¿Estás seguro que deseas cancelar la disponibilidad de este horario?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cerrar</button>
+          <button type="button" class="btn btn-danger" (click)="confirmarCancelacion()">Confirmar Cancelación</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal para Agregar Horas Disponibles -->
+<div class="modal-backdrop" *ngIf="mostrarModalAgregarHora">
+  <div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" style="max-width: 800px;"> <!-- Aumentamos el ancho del modal -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Programar Horas Disponibles</h5>
+          <button type="button" class="close" aria-label="Cerrar" (click)="cerrarModalAgregarHora()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Sección para seleccionar la fecha estimada -->
+          <div class="fecha-seleccionada mb-3">
+            <label>Semana:</label>
+            <div class="input-group">
+              <button type="button" class="btn btn-secondary" (click)="semanaAnterior()">Anterior</button>
+              <input type="text" class="form-control text-center" [value]="getSemanaSeleccionada()" readonly>
+              <button type="button" class="btn btn-secondary" (click)="semanaSiguiente()">Siguiente</button>
+            </div>
+          </div>
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div formGroupName="diasSeleccionados" class="mb-3">
+              <label>Días de la semana:</label>
+              <div class="checkbox-group">
+                <div *ngFor="let dia of dias" class="form-check">
+                  <input type="checkbox" class="form-check-input" [formControlName]="dia">
+                  <label class="form-check-label" for="{{dia}}">{{dia}}</label>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="horasSeleccionadas" class="mb-3">
+              <label>Horas disponibles:</label>
+              <div class="checkbox-group">
+                <div *ngFor="let hora of horasDisponibles" class="form-check">
+                  <input type="checkbox" class="form-check-input" [formControlName]="hora">
+                  <label class="form-check-label" for="{{hora}}">{{hora}}</label>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="cerrarModalAgregarHora()">Cerrar</button>
+              <button type="button" class="btn btn-primary" (click)="agregarHoras()">Agregar Horas</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="alert alert-success fade-in d-flex align-items-center position-fixed top-50 start-50 translate-middle"
+  role="alert" *ngIf="visible" style="z-index: 1000;">
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+    <use xlink:href="#check-circle-fill" />
+  </svg>
+  <div>
+    {{success_msg}}
+  </div>
+</div>
+
+<div class="alert alert-danger fade-in d-flex align-items-center position-fixed top-50 start-50 translate-middle" role="alert" *ngIf="errorVisible" style="z-index: 1000;">
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Error:"><use xlink:href="#x-circle-fill"/></svg>
+  <div>
+      No puedes agendar cita por el momento.
+  </div>
+</div>
+
+<!-- Modal para Detalles de la Cita Agendada -->
+<div class="modal-backdrop" *ngIf="mostrarModalDetalles">
+  <div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Detalles de la Cita</h5>
+          <button type="button" class="close" aria-label="Cerrar" (click)="cerrarModalDetalles()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Cita del Alumno: {{ citaSeleccionada?.claveUnica }}
+        </div>
+
+        <div class="modal-footer">
+          <!-- <button class="btn btn-secondary">Ver Datos del Alumno</button> -->
+          <button class="btn btn-danger" *ngIf="citaSeleccionada" (click)="cancelarCita(citaSeleccionada)">Cancelar
+            cita</button>
+          <button type="button" class="btn btn-primary" *ngIf="citaSeleccionada && ableToAddNotes" (click)="crearNotaCita(citaSeleccionada)">Crear notas</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
