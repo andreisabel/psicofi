@@ -6,7 +6,7 @@
 
 ## 🚀 1. Descripción General
 
-**PSICOFI es una **aplicación web full-stack** desarrollada como proyecto integrador para el **Departamento de Atención Psicológica (DAP)** de la Facultad de Ingeniería.
+PSICOFI es una **aplicación web** desarrollada como proyecto integrador para el **Departamento de Atención Psicológica (DAP)** de la Facultad de Ingeniería.
 
 El sistema tiene como objetivo central **modernizar y optimizar** la atención psicológica y educativa brindada a los alumnos, centralizando la administración de citas y digitalizando los registros de **salud mental**.
 
@@ -98,10 +98,10 @@ Este proyecto fue desarrollado por alumnos de **Ingeniería en Sistemas Intelige
 
 | Nombre | Rol |
 | :--- | :--- |
-| **[BAUTISTA GÓMEZ JUAN PABLO]** | Desarrollador Full-Stack |
-| **[HERNÁNDEZ ALONSO JESÚS ALEJANDRO]** | Desarrollador Frontend |
-| **[RAMÍREZ PADRÓN ERICK ENRIQUE]** | Administrador de Servidor |
-| **[VEGA MARQUEZ ANDREA ISABEL]** | Desarrollador Frontdn - QA |
+| **BAUTISTA GÓMEZ JUAN PABLO** | Desarrollador Full-Stack |
+| **HERNÁNDEZ ALONSO JESÚS ALEJANDRO** | Desarrollador Frontend |
+| **RAMÍREZ PADRÓN ERICK ENRIQUE** | Administrador de Servidor |
+| **VEGA MARQUEZ ANDREA ISABEL** | Desarrollador Frontdn - QA |
 
 **Asesoría:** Sandra Edith Nava Muñoz
 **Docente:** Edgar Fransisco Castillo Barrera
