@@ -1,10 +1,10 @@
-# 🏥 PSICOFI - Plataforma Psicológica de la Facultad de Ingeniería
+# PSICOFI - Plataforma Psicológica de la Facultad de Ingeniería
 
 **Proyecto Integrador - Facultad de Ingeniería, Universidad Autónoma de San Luis Potosí (UASLP) Semestres 2023/II-2024/II**
 
 ---
 
-## 🚀 1. Descripción General
+## 1. Descripción General
 
 PSICOFI es una **aplicación web** desarrollada como proyecto integrador para el **Departamento de Atención Psicológica (DAP)** de la Facultad de Ingeniería.
 
@@ -12,13 +12,13 @@ El sistema tiene como objetivo central **modernizar y optimizar** la atención p
 
 ---
 
-## 🎯 2. Objetivo Principal
+## 2. Objetivo Principal
 
 Desarrollar e implementar un sistema integral de gestión de pacientes en plataforma web para el DAP de la Facultad de Ingeniería, con el fin de modernizar sus procesos, mejorar la atención psicológica y educativa brindada a los alumnos, y optimizar la administración de los registros relacionados con la salud mental.
 
 ---
 
-## ✨ 3. Arquitectura y Tecnologías
+## 3. Arquitectura y Tecnologías
 
 El proyecto sigue un modelo de arquitectura **cliente-servidor**, separando completamente la lógica de la API del *frontend* visual.
 
@@ -32,7 +32,7 @@ El proyecto sigue un modelo de arquitectura **cliente-servidor**, separando comp
 
 ---
 
-## 🛠️ 4. Instalación
+## 4. Instalación
 
 Se recomienda usar **Laragon** para simplificar la configuración del entorno de desarrollo (PHP, MySQL) en Windows. El proyecto debe clonarse dentro de la carpeta `www` de Laragon.
 
@@ -92,7 +92,7 @@ Asegúrate de tener instalados:
 
 ---
 
-## 👨‍💻 5. Autores y Contribuciones
+## 5. Autores y Contribuciones
 
 Este proyecto fue desarrollado por alumnos de **Ingeniería en Sistemas Inteligentes** de la UASLP como parte de la materia *Proyecto Computacionales I - Proyectos Computacionales III*.
 
